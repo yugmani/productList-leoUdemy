@@ -4,6 +4,26 @@ p {
 }
 
 .container {
-  background-color: antiquewhite;
+  background-color: lightgray;
   padding: 5px 10px;
+}
+
+.title {
+  color: #000;
+  padding: 5px 0;
+}
+
+.product-name {
+  color: blue;
+}
+
+.qty {
+  color: blue;
+}
+
+.btn {
+  color: blue;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: yellow;
 }

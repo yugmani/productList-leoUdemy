@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Product = ({ name }) => {
+  const [quantity, setQuantity] = useState(0);
+
   const buy = () => {
-    alert(`You bought new ${name}`);
+    setQuantity(quantity + 1);
   };
+
   return (
     <div className="container">
-      <h1 style={title}>This is a Product:{name} </h1>
-      <button
-        style={{
-          color: 'blue',
-          padding: '5px 10px',
-          borderRadius: '5px',
-          background: 'yellow',
-        }}
-        onClick={buy}
-      >
+      <h3 className="title">
+        The product is: <span className="product-name">{name}</span>
+      </h3>
+      <h4>
+        Quantity:<span className="qty">{quantity}</span>
+      </h4>
+      <button className="btn" onClick={buy}>
         Buy
       </button>
     </div>
@@ -23,9 +23,3 @@ const Product = ({ name }) => {
 };
 
 export default Product;
-
-const title = {
-  color: 'orange',
-  fontSize: '40px',
-  padding: '5px 10px',
-};
