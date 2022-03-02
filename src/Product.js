@@ -17,14 +17,13 @@ const Product = ({ name, price, onCalculateTotal, onShowProduct }) => {
         Quantity:<span className="qty">{quantity}</span>
       </h4>
       <h4>
-        Price:<span className="qty">${price}</span>
+        Rate:<span className="qty">${price}</span>
       </h4>
+
       <button className="buy-btn" onClick={buy}>
         Buy
       </button>
-      <button className="show-btn" onClick={() => onShowProduct(name)}>
-        Show
-      </button>
+
       <hr />
     </div>
   );
@@ -40,30 +39,25 @@ const ProductList = () => {
   const calculateTotal = (price) => {
     setTotal(total + +price);
   };
-  const showProduct = (name) => {
-    alert("You've selected " + name);
-  };
+
   return (
     <div>
       <Product
         name="Android Tablet"
         price="200"
         onCalculateTotal={calculateTotal}
-        onShowProduct={showProduct}
       />
 
       <Product
         name="Apple Watch"
         price="300"
         onCalculateTotal={calculateTotal}
-        onShowProduct={showProduct}
       />
 
       <Product
         name="Nokia Phone"
         price="99"
         onCalculateTotal={calculateTotal}
-        onShowProduct={showProduct}
       />
 
       <Total totalCash={total} />
