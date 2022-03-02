@@ -2,6 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 
-import Product from './Product';
+import ProductList from './Product';
 
-ReactDOM.render(<Product name="Android" />, document.getElementById('root'));
+ReactDOM.render(<ProductList />, document.getElementById('root'));

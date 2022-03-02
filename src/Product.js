@@ -18,8 +18,24 @@ const Product = ({ name }) => {
       <button className="btn" onClick={buy}>
         Buy
       </button>
+      <hr />
     </div>
   );
 };
 
-export default Product;
+const Total = () => {
+  return <h3>Total Cash:0</h3>;
+};
+
+const ProductList = () => {
+  return (
+    <div>
+      <Product />
+      <Product />
+      <Product />
+      <Total />
+    </div>
+  );
+};
+
+export default ProductList;
