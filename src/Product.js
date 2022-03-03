@@ -9,10 +9,8 @@ const Product = ({ name, price, image, onCalculateTotal, onShowProduct }) => {
   };
 
   return (
-    <div className="container">
-      <h2 className="title" className="product-name">
-        {name}
-      </h2>
+    <li className="container">
+      <h2 className="title">{name}</h2>
       <div className="product-layout">
         <div className="product-info">
           <h4>
@@ -32,44 +30,48 @@ const Product = ({ name, price, image, onCalculateTotal, onShowProduct }) => {
           {/* <img src={image} alt={name} /> */}
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 
-const Total = ({ totalCash }) => {
+const Total = ({ totalCash, totalItems }) => {
   return (
-    <h3>
-      Total Cash:<span className="qty">{totalCash}</span>
-    </h3>
+    <div>
+      <h3>
+        Total Cash:<span className="qty">{totalCash}</span>{' '}
+        <small>
+          [<span className="qty"> {totalItems}</span> item(s) ]
+        </small>
+      </h3>
+    </div>
   );
 };
 
 const ProductList = () => {
   const [total, setTotal] = useState(0);
   const [products, setProducts] = useState(items);
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
   const calculateTotal = (price) => {
     setTotal(total + +price);
+    setTotalQuantity(totalQuantity + 1);
   };
 
   return (
     <div>
       <ul>
         {products.map((product) => (
-          <li>
-            {' '}
-            <Product
-              key={product.id}
-              name={product.name}
-              price={product.price}
-              image={product.image}
-              onCalculateTotal={calculateTotal}
-            />
-          </li>
+          <Product
+            key={product.id}
+            name={product.name}
+            price={product.price}
+            image={product.image}
+            onCalculateTotal={calculateTotal}
+          />
         ))}
       </ul>
 
-      <Total totalCash={total} />
+      <Total totalCash={total} totalItems={totalQuantity} />
     </div>
   );
 };
