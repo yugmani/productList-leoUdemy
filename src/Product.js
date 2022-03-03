@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Product = ({ name, price, image, onCalculateTotal, onShowProduct }) => {
+const Product = ({ name, price, image, onCalculateTotal }) => {
   const [quantity, setQuantity] = useState(0);
 
   const buy = () => {
@@ -38,45 +38,57 @@ const Total = ({ totalCash, totalItems }) => {
   return (
     <div>
       <h3>
-        Total Cash:<span className="qty">{totalCash}</span>{' '}
-        <small>
-          [<span className="qty"> {totalItems}</span> item(s) ]
-        </small>
+        Total Cash:<span className="qty">{totalCash}</span>
+      </h3>
+      <h3>
+        [<span className="qty"> {totalItems}</span> item(s) ]
       </h3>
     </div>
   );
 };
 
-const ProductForm = () => {
+const ProductForm = ({ index, onCreateProduct }) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState('');
 
-  const createProduct = () => {
-    alert(`${name} of $${price} is added into list.`);
+  const createProduct = (event) => {
+    event.preventDefault();
+    const product = { id: index, name, price, image };
+    onCreateProduct(product);
+    setName('');
+    setPrice(0);
+    setImage(' ');
   };
 
   return (
     <form>
-      <label>Product Name</label>
+      <h3 className="title">Add New Item</h3>
+      <br />
       <input
         type="text"
+        value={name}
         onChange={(e) => setName(e.target.value)}
-      /> <br /> <br />
-      <label>Product Price</label>
+        placeholder="Product Name"
+      />{' '}
+      <br /> <br />
       <input
         type="number"
+        // value={price}
         onChange={(e) => setPrice(e.target.value)}
-      /> <br /> <br />
-      <label>Image Link</label>
+        placeholder="Product Price"
+      />{' '}
+      <br /> <br />
       <input
         type="text"
+        value={image}
         onChange={(e) => setImage(e.target.value)}
-      /> <br /> <br />
+        placeholder="Image Link"
+      />{' '}
+      <br /> <br />
       <button onClick={createProduct} className="create-btn">
         Create
       </button>
-      <hr />
     </form>
   );
 };
@@ -91,9 +103,17 @@ const ProductList = () => {
     setTotalQuantity(totalQuantity + 1);
   };
 
+  const addProduct = (product) => {
+    setProducts([...products, product]);
+  };
+
   return (
     <div>
-      <ProductForm />
+      <div className="dashboard">
+        <ProductForm index={products.length + 1} onCreateProduct={addProduct} />
+        <Total totalCash={total} totalItems={totalQuantity} />
+      </div>
+      <hr />
       <ul>
         {products.map((product) => (
           <Product
@@ -105,8 +125,6 @@ const ProductList = () => {
           />
         ))}
       </ul>
-
-      <Total totalCash={total} totalItems={totalQuantity} />
     </div>
   );
 };
