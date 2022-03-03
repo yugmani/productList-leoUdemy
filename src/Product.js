@@ -47,6 +47,40 @@ const Total = ({ totalCash, totalItems }) => {
   );
 };
 
+const ProductForm = () => {
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState(0);
+  const [image, setImage] = useState('');
+
+  const createProduct = () => {
+    alert(`${name} of $${price} is added into list.`);
+  };
+
+  return (
+    <form>
+      <label>Product Name</label>
+      <input
+        type="text"
+        onChange={(e) => setName(e.target.value)}
+      /> <br /> <br />
+      <label>Product Price</label>
+      <input
+        type="number"
+        onChange={(e) => setPrice(e.target.value)}
+      /> <br /> <br />
+      <label>Image Link</label>
+      <input
+        type="text"
+        onChange={(e) => setImage(e.target.value)}
+      /> <br /> <br />
+      <button onClick={createProduct} className="create-btn">
+        Create
+      </button>
+      <hr />
+    </form>
+  );
+};
+
 const ProductList = () => {
   const [total, setTotal] = useState(0);
   const [products, setProducts] = useState(items);
@@ -59,6 +93,7 @@ const ProductList = () => {
 
   return (
     <div>
+      <ProductForm />
       <ul>
         {products.map((product) => (
           <Product
